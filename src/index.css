@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Customize the cursor inside the lightbox */
+.yarl__inner {
+  cursor: zoom-out;
+} 

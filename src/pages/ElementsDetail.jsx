@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 // Import your background images again or use the same ones from Home
 import bgSocialize from '../assets/we_socialize.png';
 import bgLearn from '../assets/we_learn.jpg';
@@ -14,6 +16,10 @@ import l2 from '../assets/l2.jpg';
 import l3 from '../assets/l3.jpg';
 
 const ElementsDetail = () => {
+    const [open, setOpen] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [activeGallery, setActiveGallery] = useState([]);
+    
   const details = [
     {
       title: "We Socialize",
@@ -93,18 +99,37 @@ const ElementsDetail = () => {
                         <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-widest text-center">Highlights from {item.title}</h4>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {item.gallery.map((img, imgIndex) => (
-                                <div key={imgIndex} className="overflow-hidden rounded-xl h-48 group relative">
+                               <div 
+                                    key={imgIndex} 
+                                    className="overflow-hidden rounded-xl h-48 group relative cursor-pointer"
+                                    onClick={() => {
+                                        setActiveGallery(item.gallery.map(src => ({ src }))); // Prepare images for Lightbox
+                                        setCurrentIndex(imgIndex);
+                                        setOpen(true);
+                                    }}
+                                >
                                     <img 
                                         src={img} 
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                                        alt={`${item.title} moment`} 
+                                        alt="Highlight" 
                                     />
-                                    <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                                 </div>
                             ))}
                         </div>
+
+                        {/* The Lightbox Component (Add this at the very bottom of the return) */}
+                        <Lightbox
+                            open={open}
+                            close={() => setOpen(false)}
+                            index={currentIndex}
+                            slides={activeGallery}
+                            controller={{ closeOnBackdropClick: true, closeOnPullDown: true }}
+                            on={{
+                                click: () => setOpen(false),
+                            }}
+                            animation={{ fade: 300}}
+                        />
                     </div>
-                    
                     {/* Horizontal Divider except for the last item */}
                     {index !== details.length - 1 && <hr className="border-gray-100 mt-20" />}
                 </div>
