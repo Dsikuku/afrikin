@@ -1,31 +1,31 @@
 const projects = [
   {
     id: 1,
-    title: "Scarborough Green Space",
-    category: "Environment",
-    description: "Transforming underused urban lots into vibrant community gardens and pollinator habitats.",
-    status: "Active"
-  },
-  {
-    id: 2,
-    title: "Etobicoke Youth Tech",
-    category: "Education",
-    description: "Free coding and digital literacy workshops for high school students in the West End.",
-    status: "Enrolling"
-  },
-  {
-    id: 3,
-    title: "Downtown Food Rescue",
+    title: "Resource Hub",
     category: "Social Support",
-    description: "Partnering with local restaurants to redistribute surplus food to shelters across the core.",
+    description: "Newcomer + Youth: A curated list of services and organizations for housing, education, job opportunities, mental health, and cultural integration.",
     status: "Ongoing"
   },
   {
+    id: 2,
+    title: "Community Love",
+    category: "Community",
+    description: "Our clothing drives & donation campaigns are making an impact in our communities. Join us in spreading love and support where it’s needed most!",
+    status: "Ongoing"
+  },
+  {
+    id: 3,
+    title: "Networking Mixer",
+    category: "Networking",
+    description: "Our newest initiative brings together young professionals, creators, and community leaders to exchange ideas, collaborate, and grow.",
+    status: "In Progress"
+  },
+  {
     id: 4,
-    title: "North York Arts Fest",
+    title: "Book Club",
     category: "Culture",
-    description: "An annual street festival celebrating the diverse cultural heritage of North York residents.",
-    status: "Upcoming"
+    description: "Our book club is a place to come together, explore diverse stories, and engage in meaningful conversations. We create a space to learn, grow, and connect one page at a time.",
+    status: "Ongoing"
   }
 ];
 
@@ -36,7 +36,7 @@ const Initiatives = () => {
       <section className="bg-blue-700 py-16 px-6 text-white text-center">
         <h1 className="text-4xl font-bold mb-4">Our Initiatives</h1>
         <p className="text-xl max-w-2xl mx-auto opacity-90">
-          From the Lakeshore to Steeles, we're working on projects that make Toronto more livable for everyone.
+          At AfriKin Circle, we believe in building impactful projects that foster community, empowerment, and change. Explore what’s in progress and what’s on the horizon.
         </p>
       </section>
 
