@@ -6,10 +6,10 @@ import bgMove from '../assets/we_move.png';
 import bgCreate from '../assets/we_create.png';
 import bgCare from '../assets/we_care.png';
 import s1 from '../assets/s1.jpg';
-import s2 from '../assets/s2.jpg';
+import s2 from '../assets/s2.JPG';
 import s3 from '../assets/s3.jpg';
 import s4 from '../assets/s4.jpg';
-import l1 from '../assets/l1.jpg';
+import l1 from '../assets/l1.JPG';
 import l2 from '../assets/l2.jpg';
 import l3 from '../assets/l3.jpg';
 
