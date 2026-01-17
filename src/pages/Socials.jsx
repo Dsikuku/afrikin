@@ -11,7 +11,7 @@ import AfroHouseSipPaint from '../assets/events/Sip&Paint.png';
 import KinnectSeriesLinkUp from '../assets/events/Kinnect1.jpg';
 import AfriKinFieldDay from '../assets/events/FieldDay.jpg';
 import NyamaChomaNight from '../assets/events/NyamaChoma1.jpg';
-import KinReadsBookClub from '../assets/events/KinReadsBookClub.jpg';
+import KinReadsBookClub from '../assets/events/KinReadsBookclub.jpg';
 import MovieNight from '../assets/events/MovieNight.jpg';
 import YogaSession from '../assets/events/Yoga.jpg';
 import NyamaChomaDancehall from '../assets/events/NyamaChoma2.jpg';
