@@ -33,7 +33,7 @@ const Initiatives = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Header Section */}
-      <section className="bg-blue-700 py-16 px-6 text-white text-center">
+      <section className="bg-slate-900 py-16 px-6 text-white text-center">
         <h1 className="text-4xl font-bold mb-4">Our Initiatives</h1>
         <p className="text-xl max-w-2xl mx-auto opacity-90">
           At AfriKin Circle, we believe in building impactful projects that foster community, empowerment, and change. Explore what’s in progress and what’s on the horizon.

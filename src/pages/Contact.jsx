@@ -8,7 +8,7 @@ const Contact = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-blue-600 py-16 md:py-24 px-6 text-center text-white">
+      <section className="bg-slate-900 py-16 md:py-24 px-6 text-center text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Connect With Us</h1>
         <p className="text-lg opacity-90 max-w-2xl mx-auto font-light">
           Have questions or want to join the circle? Reach out through our socials or drop us a line below.

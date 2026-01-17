@@ -77,7 +77,7 @@ const ElementsDetail = () => {
     return (
         <div className="bg-white min-h-screen">
             {/* Hero Section */}
-            <section className="bg-blue-600 py-16 md:py-24 px-6 text-center text-white">
+            <section className="bg-slate-900 py-16 md:py-24 px-6 text-center text-white">
                 <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Our Elements</h1>
                 <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
                     Explore how we build, grow, and sustain our community in Toronto.
