@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { FaCalendarAlt, FaHistory, FaArrowRight, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
-import PhotoAlbum from "react-photo-album";
+import { FaCalendarAlt, FaHistory, FaArrowRight, FaMapMarkerAlt, FaClock, FaInstagram, FaPlus } from 'react-icons/fa';
 import Lightbox from "yet-another-react-lightbox"; 
 import "yet-another-react-lightbox/styles.css";
 
-// Asset imports remain the same...
+// Asset imports
 import ChaiChill from '../assets/events/Chai_Chill.jpg';
 import CocktailMixology from '../assets/events/Mixology.png';
 import AfroHouseSipPaint from '../assets/events/Sip&Paint.png';
@@ -25,13 +24,11 @@ import g6 from '../assets/gallery/g6.jpg';
 import g7 from '../assets/gallery/g7.jpg';
 import g8 from '../assets/gallery/g8.jpg';
 import g9 from '../assets/gallery/g9.jpg';
-import g10 from '../assets/gallery/g10.jpg';
-import g11 from '../assets/gallery/g11.jpg';
-import g12 from '../assets/gallery/g12.jpg';    
 
 const Socials = () => {
   const [view, setView] = useState('upcoming');
   const [index, setIndex] = useState(-1);
+  const [visibleRows, setVisibleRows] = useState(1); // Controls how many rows of 3 are shown
 
   const events = {
     upcoming: [
@@ -48,168 +45,141 @@ const Socials = () => {
         date: "March 02, 2026",
         time: "7:00 PM",
         location: "Distillery District Studio",
-        desc: "A night of expression and warmth. Share a poem, a song, or just a cup of coffee with the circle.",
+        desc: "A night of expression and warmth. Share a poem or a song with the circle.",
         tag: "We Create"
+      },
+      {
+        title: "AfriKin Wellness Morning",
+        date: "April 12, 2026",
+        time: "9:00 AM",
+        location: "High Park",
+        desc: "A guided meditation and light yoga session to ground the community.",
+        tag: "We Heal"
       }
     ],
     past: [
-      { title: "Cocktail & Mixology Party", date: "Nov 14, 2025", summary: "A cozy evening of cocktail/mocktail making, conversation & kinnection.", image: CocktailMixology, stats: "45+ Attendees" },
-      { title: "AfroHouse Sip & Paint", date: "Nov 09, 2025", summary: "An afternoon of color, connection & calm. pattern stories.", image: AfroHouseSipPaint, stats: "60+ Attendees" },
+      { title: "Cocktail & Mixology", date: "Nov 14, 2025", summary: "A cozy evening of cocktail making and kinnection.", image: CocktailMixology, stats: "45+ Attendees" },
+      { title: "AfroHouse Sip & Paint", date: "Nov 09, 2025", summary: "An afternoon of color, connection & calm.", image: AfroHouseSipPaint, stats: "60+ Attendees" },
       { title: "Kinnect Series 2", date: "Nov 09, 2025", summary: "Thinking about a career in Cybersecurity.", image: KinnectSeries, stats: "20+ Attendees" },
       { title: "AfriKin Field Day", date: "Aug 09, 2025", summary: "Outdoor games. Sunshine, Good company.", image: AfriKinFieldDay, stats: "20+ Attendees" },
       { title: "Nyama Choma Night", date: "Jun 06, 2025", summary: "Afrobeat Edition ft. Grills & Vibes.", image: NyamaChomaNight, stats: "35+ Attendees" },
       { title: "KinReads Book Club", date: "May 31, 2025", summary: "Annual community grill and chill session.", image: KinReadsBookClub, stats: "5+ Attendees" },
-      { title: "Kinnect Series 1", date: "Mar 22, 2025", summary: "Speed networking and round table discussions.", image: KinnectSeriesLinkUp, stats: "25+ Attendees" },
-      { title: "Movie Night", date: "Feb 08, 2025", summary: "Screening 'The Gods Must be Crazy'.", image: MovieNight, stats: "15+ Attendees" },
-      { title: "Nyama Choma - Dancehall", date: "Jan 31, 2025", summary: "Grilled meats and classic riddims.", image: NyamaChomaDancehall, stats: "35+ Attendees" },
-      { title: "Chai & Chill", date: "Jan 18, 2025", summary: "Warm drinks and card games.", image: ChaiChill, stats: "5+ Attendees" },
-      { title: "Yoga", date: "Jan 14, 2025", summary: "Stretch and move session for wellness.", image: YogaSession, stats: "5+ Attendees" },
     ]
   };
 
-  const photos = [
-    { src: g1, width: 800, height: 600 }, { src: g2, width: 1600, height: 900 },
-    { src: g3, width: 1080, height: 1350 }, { src: g4, width: 800, height: 600 },
-    { src: g5, width: 1080, height: 1080 }, { src: g6, width: 1600, height: 900 },
-    { src: g7, width: 1080, height: 1350 }, { src: g8, width: 800, height: 600 },
-    { src: g9, width: 1080, height: 1080 }, { src: g10, width: 1600, height: 900 },
-    { src: g11, width: 1080, height: 1350 }, { src: g12, width: 800, height: 600 },
+  // Full Gallery Array
+  const archiveGallery = [
+    { src: g1, title: "Unity" }, { src: g2, title: "Laughter" }, { src: g3, title: "Culture" },
+    { src: g4, title: "Circle" }, { src: g5, title: "Joy" }, { src: g6, title: "Growth" },
+    { src: g7, title: "Spirit" }, { src: g8, title: "Vibe" }, { src: g9, title: "Kinnect" },
   ];
 
+  const itemsToShow = visibleRows * 3;
+
+  const handleLoadMore = () => {
+    setVisibleRows(prev => prev + 1);
+  };
+
   return (
-    <div className="min-h-screen bg-white pb-20">
-      {/* Header */}
-      <section className="bg-slate-900 py-24 px-6 text-center text-white relative overflow-hidden">
+    <div className="min-h-screen bg-white pb-20 overflow-x-hidden">
+      
+      {/* 1. HERO SECTION */}
+      <section className="bg-slate-900 py-32 px-6 text-center text-white relative">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
-            {/* Swapped blue glow for brand secondary glow */}
-            <div className="absolute top-0 left-0 w-64 h-64 bg-brand-primary rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+          <div className="absolute top-0 left-0 w-96 h-96 bg-brand-primary rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
         </div>
-        <h1 className="text-4xl md:text-7xl font-extrabold mb-4 relative z-10 tracking-tight">Socials & Events</h1>
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light relative z-10">
-          The heartbeat of AfriKin. Explore our journey through connection and community.
-        </p>
+        <div className="relative z-10">
+          <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tighter">Socials<span className="text-brand-primary">.</span></h1>
+          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">The heartbeat of AfriKin. Explore our journey through connection and community.</p>
+        </div>
       </section>
 
-      {/* View Toggle */}
-      <div className="max-w-7xl mx-auto px-6 -translate-y-8 flex justify-center z-20 relative">
-        <div className="inline-flex p-2 bg-white border border-gray-100 shadow-2xl rounded-2xl">
-          <button 
-            onClick={() => setView('upcoming')}
-            className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all duration-300 ${view === 'upcoming' ? 'bg-brand-dark text-white shadow-lg' : 'text-gray-500 hover:bg-gray-50'}`}
-          >
-            <FaCalendarAlt /> Upcoming
-          </button>
-          <button 
-            onClick={() => setView('past')}
-            className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all duration-300 ${view === 'past' ? 'bg-brand-dark text-white shadow-lg' : 'text-gray-500 hover:bg-gray-50'}`}
-          >
-            <FaHistory /> Past Events
-          </button>
+      {/* 2. NAVIGATION TOGGLE */}
+      <div className="max-w-7xl mx-auto px-6 -translate-y-10 flex justify-center z-20 relative">
+        <div className="inline-flex p-1.5 bg-white border border-gray-100 shadow-2xl rounded-3xl">
+          <button onClick={() => setView('upcoming')} className={`flex items-center gap-2 px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all duration-300 ${view === 'upcoming' ? 'bg-brand-dark text-white shadow-lg' : 'text-gray-400 hover:bg-gray-50'}`}><FaCalendarAlt size={12} /> Upcoming</button>
+          <button onClick={() => setView('past')} className={`flex items-center gap-2 px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all duration-300 ${view === 'past' ? 'bg-brand-dark text-white shadow-lg' : 'text-gray-400 hover:bg-gray-50'}`}><FaHistory size={12} /> Memories</button>
         </div>
       </div>
 
-      {/* Events List */}
+      {/* 3. EVENTS GRID */}
       <section className="max-w-7xl mx-auto py-12 px-6">
-        {view === 'upcoming' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {events.upcoming.map((event, i) => (
-              <div key={i} className="bg-white border border-gray-100 rounded-[2.5rem] p-10 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 group">
-                <div className="flex justify-between items-start mb-6">
-                    {/* Tag colors updated for brand consistency */}
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-dark bg-brand-primary/10 px-4 py-2 rounded-full">
-                        {event.tag}
-                    </span>
-                    <div className="text-gray-200 group-hover:text-brand-primary transition-colors">
-                        <FaCalendarAlt size={28} />
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {(view === 'upcoming' ? events.upcoming : events.past).map((event, i) => (
+            <div key={i} className="bg-white border border-gray-100 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col group">
+              {view === 'past' && (
+                <div className="h-72 overflow-hidden relative">
+                  <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-4">{event.title}</h3>
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-3 text-gray-500 font-medium italic">
-                    <FaClock className="text-brand-primary" /> {event.date} • {event.time}
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-500 font-medium italic">
-                    <FaMapMarkerAlt className="text-brand-primary" /> {event.location}
-                  </div>
+              )}
+              <div className="p-10 flex flex-col flex-grow">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-brand-dark bg-brand-primary/10 px-4 py-1.5 rounded-full w-fit mb-6">{event.tag || event.date}</span>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-brand-primary transition-colors">{event.title}</h3>
+                <p className="text-gray-500 text-sm font-light leading-relaxed mb-8">{event.desc || event.summary}</p>
+                <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
+                  <span className="text-brand-dark font-black text-[11px] uppercase tracking-widest">{event.stats || event.time}</span>
+                  <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center group-hover:bg-brand-primary transition-colors"><FaArrowRight size={12} /></div>
                 </div>
-                <p className="text-gray-600 leading-relaxed mb-8 text-lg">{event.desc}</p>
-                <button className="w-full flex justify-center items-center gap-3 bg-brand-dark text-white py-4 rounded-2xl font-bold hover:bg-brand-primary transition-all group-hover:shadow-xl group-hover:shadow-brand-primary/20">
-                  Register Interest <FaArrowRight />
-                </button>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. DYNAMIC ARCHIVE GRID (LOAD MORE) */}
+      <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gray-50">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter">The Archive<span className="text-brand-primary">.</span></h2>
+            <p className="text-gray-400 font-light italic">Captured moments from our circle.</p>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.past.map((event, i) => (
-              <div key={i} className="group relative bg-slate-900 rounded-[2rem] overflow-hidden aspect-[4/5] shadow-lg hover:shadow-2xl transition-all duration-500">
-                <img src={event.image} alt={event.title} className="w-full h-full object-cover opacity-70 group-hover:scale-110 group-hover:opacity-30 transition-transform duration-700" />
-                <div className="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent">
-                  <p className="text-brand-primary font-black text-xs tracking-widest mb-2 uppercase">{event.date}</p>
-                  <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-brand-primary transition-colors">{event.title}</h3>
-                  <div className="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500">
-                    <p className="text-gray-300 text-sm mb-4 leading-relaxed">{event.summary}</p>
-                    <div className="pt-4 border-t border-white/10 flex justify-between items-center">
-                        <span className="text-[10px] text-brand-primary font-bold uppercase tracking-widest">{event.stats}</span>
-                    </div>
-                  </div>
-                </div>
+          <div className="hidden md:block h-px bg-gray-100 flex-grow mx-10"></div>
+          <div className="text-[10px] font-black uppercase tracking-widest text-gray-400">Showing {Math.min(itemsToShow, archiveGallery.length)} of {archiveGallery.length}</div>
+        </div>
+
+        {/* Row logic: Grid with fixed 3 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 transition-all duration-700">
+          {archiveGallery.slice(0, itemsToShow).map((img, idx) => (
+            <div 
+              key={idx} 
+              className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group cursor-zoom-in animate-fade-in"
+              onClick={() => setIndex(idx)}
+            >
+              <img src={img.src} alt={img.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent opacity-60"></div>
+              <div className="absolute bottom-8 left-8">
+                <h4 className="text-white font-bold text-xl">{img.title}</h4>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Load More Button */}
+        {itemsToShow < archiveGallery.length && (
+          <div className="mt-20 flex justify-center">
+            <button 
+              onClick={handleLoadMore}
+              className="group flex items-center gap-4 bg-white border-2 border-slate-900 text-slate-900 px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-slate-900 hover:text-white transition-all shadow-xl active:scale-95"
+            >
+              <FaPlus className="group-hover:rotate-180 transition-transform duration-500" />
+              Load More Moments
+            </button>
           </div>
         )}
       </section>
 
-      {/* Modern Divider */}
-      <div className="flex justify-center py-16">
-        <div className="flex gap-3">
-            {[...Array(3)].map((_, i) => (
-              <div 
-                key={i} 
-                className={`h-2 rounded-full bg-brand-primary ${i === 1 ? 'w-8' : 'w-2'}`}
-              ></div>
-            ))}
-        </div>
-      </div>
+      {/* LIGHTBOX */}
+      <Lightbox slides={archiveGallery.map(img => ({ src: img.src }))} open={index >= 0} index={index} close={() => setIndex(-1)} styles={{ container: { backgroundColor: "rgba(10, 10, 10, 0.99)" } }} />
 
-      {/* Community Gallery Section */}
-      <section className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div className="max-w-xl">
-                <h2 className="text-4xl font-bold text-gray-900 mb-2">Highlights From Our Socials</h2>
-                <p className="text-brand-dark font-medium italic">Unfiltered joy from our latest gatherings.</p>
-            </div>
-            <div className="h-px bg-gray-100 flex-grow mx-8 hidden md:block"></div>
-            <div className="bg-brand-primary/10 text-brand-dark font-black text-xs px-4 py-2 rounded-full tracking-widest uppercase">
-                {photos.length} Captures
-            </div>
+      {/* SOCIAL CTA */}
+      <section className="max-w-4xl mx-auto px-6 pt-20">
+        <div className="p-16 md:p-24 rounded-[4rem] bg-slate-900 text-center relative overflow-hidden group">
+          <FaInstagram className="text-6xl text-brand-primary mx-auto mb-8 animate-pulse" />
+          <h2 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">Join The Circle</h2>
+          <a href="#" className="inline-block bg-brand-primary text-brand-dark px-14 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-white hover:scale-105 transition-all shadow-2xl shadow-brand-primary/10">@AfriKinCircle</a>
         </div>
-
-        <div className="rounded-[3rem] overflow-hidden p-3 bg-gray-50 border border-gray-100">
-          <PhotoAlbum 
-            layout="masonry" 
-            photos={photos} 
-            columns={(containerWidth) => {
-              if (containerWidth < 640) return 2;
-              if (containerWidth < 1024) return 3;
-              return 4;
-            }}
-            spacing={20}
-            onClick={({ index }) => setIndex(index)}
-          />
-        </div>
-
-        <Lightbox
-          slides={photos}
-          open={index >= 0}
-          index={index}
-          close={() => setIndex(-1)}
-          on={{ click: () => setIndex(-1) }}
-          animation={{ fade: 300 }}
-          styles={{ container: { backgroundColor: "rgba(12, 12, 12, 0.98)" } }}
-        />
       </section>
+
     </div>
   );
 };
