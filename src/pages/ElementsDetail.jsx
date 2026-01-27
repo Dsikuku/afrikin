@@ -82,7 +82,7 @@ const ElementsDetail = () => {
                 
                 <div className="relative z-10 max-w-4xl mx-auto">
                     <span className="text-brand-primary uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block animate-pulse">Our Methodology</span>
-                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter italic">The Elements<span className="text-brand-primary">.</span></h1>
+                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">Our Elements<span className="text-brand-primary">.</span></h1>
                     <p className="text-lg text-gray-400 max-w-xl mx-auto font-light leading-relaxed">
                         The five pillars that form the foundation of our community ecosystem in Toronto.
                     </p>

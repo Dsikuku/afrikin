@@ -89,7 +89,8 @@ const Socials = () => {
           <div className="absolute top-0 left-0 w-96 h-96 bg-brand-primary rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
         </div>
         <div className="relative z-10">
-          <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tighter">Socials<span className="text-brand-primary">.</span></h1>
+          <span className="text-brand-primary uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block animate-pulse">Our Work</span>
+          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">Socials<span className="text-brand-primary">.</span></h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">The heartbeat of AfriKin. Explore our journey through connection and community.</p>
         </div>
       </section>

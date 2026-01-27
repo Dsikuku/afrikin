@@ -45,7 +45,7 @@ const Initiatives = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <span className="text-brand-primary uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block">Our Impact</span>
-          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter italic">
+          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">
             Initiatives<span className="text-brand-primary">.</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
