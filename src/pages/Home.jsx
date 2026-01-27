@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Assuming you're using react-router
 
 import slide1 from '../assets/holdinghands.jpg';
 import slide2 from '../assets/community.jpg';
@@ -27,9 +28,9 @@ const Home = () => {
     ];
 
     const communityRoles = [
-        { role: "Creators", desc: "The visionaries behind this Circle.", style: "border-purple-200 bg-purple-50", accent: "text-purple-700" },
-        { role: "Volunteers", desc: "The hands and hearts of AfriKin.", style: "border-blue-200 bg-blue-50", accent: "text-blue-700" },
-        { role: "Supporter", desc: "The people & organizations who amplify our impact.", style: "border-purple-200 bg-purple-50", accent: "text-purple-700" },
+        { role: "Creators", desc: "The visionaries behind this Circle.", style: "border-brand-primary/20 bg-brand-light/5", accent: "text-brand-primary" },
+        { role: "Volunteers", desc: "The hands and hearts of AfriKin.", style: "border-brand-dark/20 bg-brand-dark/5", accent: "text-brand-dark" },
+        { role: "Supporters", desc: "The people & organizations who amplify our impact.", style: "border-brand-primary/20 bg-brand-light/5", accent: "text-brand-primary" },
     ];
 
     useEffect(() => {
@@ -60,25 +61,27 @@ const Home = () => {
 
                 <div className="relative z-20 text-center px-4 sm:px-6 max-w-4xl">
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-2 drop-shadow-lg leading-tight">
-                        Find Your <span className="text-blue-400">People.</span>
+                        Find Your <span className="text-brand-primary">People.</span>
                     </h1>
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-2 drop-shadow-lg leading-tight">
-                        Build Your <span className="text-blue-400">Community.</span>
+                        Build Your <span className="text-brand-primary">Community.</span>
                     </h1>
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-lg leading-tight">
-                        Your Circle Starts <span className="text-blue-400">Here.</span>
+                        Your Circle Starts <span className="text-brand-primary">Here.</span>
                     </h1>
-                    <p className="text-lg md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow-md">
+                    <p className="text-lg md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto drop-shadow-md font-light">
                         A grassroots initiative dedicated to sustainability, social equity, and community growth.
                     </p>
-                    <button className="w-full sm:w-auto bg-blue-700 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-brand-dark transition-all shadow-xl hover:shadow-blue-500/50">
-                        Let's Socialize
-                    </button>
+                    <Link to="/socials">
+                        <button className="w-full sm:w-auto bg-brand-primary text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-brand-dark transition-all shadow-xl hover:shadow-brand-primary/30">
+                            Let's Socialize
+                        </button>
+                    </Link>
                 </div>
 
                 <div className="absolute bottom-8 z-30 flex gap-2">
                     {slides.map((_, i) => (
-                        <div key={i} className={`h-1.5 rounded-full transition-all ${i === currentImage ? "bg-blue-500 w-10" : "bg-white/40 w-6"}`} />
+                        <div key={i} className={`h-1.5 rounded-full transition-all ${i === currentImage ? "bg-brand-primary w-10" : "bg-white/40 w-6"}`} />
                     ))}
                 </div>
             </section>
@@ -88,6 +91,7 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-12 md:mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Our Elements</h2>
+                        <div className="w-16 h-1 bg-brand-primary mx-auto mt-4 rounded-full"></div>
                         <p className="text-gray-500 mt-4 text-base md:text-lg">The five pillars of the AfriKin community.</p>
                     </div>
 
@@ -98,10 +102,9 @@ const Home = () => {
                                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                                     style={{ backgroundImage: `url(${element.bgImage})` }}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                                 <div className="relative h-full z-10 p-6 flex flex-col justify-end items-center text-center">
-                                    <div className="text-3xl mb-3 transform transition-transform group-hover:-translate-y-2">{element.icon}</div>
-                                    <h3 className="text-xl font-bold text-white mb-2">{element.title}</h3>
+                                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-primary transition-colors">{element.title}</h3>
                                     <p className="text-gray-200 text-xs leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         {element.desc}
                                     </p>
@@ -113,19 +116,19 @@ const Home = () => {
             </section>
 
             {/* Community Section */}
-            <section className="py-16 md:py-24 px-4 sm:px-6 bg-slate-50">
+            <section className="py-16 md:py-24 px-4 sm:px-6 bg-gray-50">
                 <div className="max-w-6xl mx-auto">
                     <div className="flex flex-col lg:flex-row items-center gap-12">
                         <div className="w-full lg:w-1/3 text-center lg:text-left">
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Community</h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
-                                AfrikIn Circle isn't an organization—it's a collection of passionate people. 
+                                AfriKin Circle isn't just an organization—it's a collection of passionate people. 
                                 There's a place for you to share your time, resources, or talents.
                             </p>
                         </div>
                         <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-3 gap-6">
                             {communityRoles.map((item, index) => (
-                                <div key={index} className={`p-8 rounded-2xl border-2 ${item.style} transition-all hover:-translate-y-2 hover:shadow-lg`}>
+                                <div key={index} className={`p-8 rounded-2xl border ${item.style} transition-all hover:-translate-y-2 hover:shadow-lg hover:border-brand-primary/50`}>
                                     <h3 className={`text-xl font-bold mb-3 ${item.accent}`}>{item.role}</h3>
                                     <p className="text-gray-700 text-sm leading-relaxed">{item.desc}</p>
                                 </div>
@@ -138,13 +141,13 @@ const Home = () => {
             {/* Stats Section */}
             <section className="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-                    <div className="text-center p-10 border border-gray-100 rounded-2xl shadow-sm bg-white transition-hover hover:shadow-md">
-                        <h3 className="text-5xl font-extrabold text-blue-600 mb-2">200+</h3>
+                    <div className="text-center p-10 border border-gray-100 rounded-3xl shadow-sm bg-white transition-all hover:shadow-xl hover:border-brand-primary/20 group">
+                        <h3 className="text-5xl font-extrabold text-brand-dark mb-2 group-hover:scale-110 transition-transform">200+</h3>
                         <p className="text-gray-400 font-semibold uppercase tracking-widest text-sm">Event Attendees</p>
                     </div>
-                    <div className="text-center p-10 border border-gray-100 rounded-2xl shadow-sm bg-white transition-hover hover:shadow-md">
-                        <h3 className="text-5xl font-extrabold text-blue-600 mb-2">3</h3>
-                        <p className="text-gray-400 font-semibold uppercase tracking-widest text-sm">Community Supports</p>
+                    <div className="text-center p-10 border border-gray-100 rounded-3xl shadow-sm bg-white transition-all hover:shadow-xl hover:border-brand-primary/20 group">
+                        <h3 className="text-5xl font-extrabold text-brand-dark mb-2 group-hover:scale-110 transition-transform">3</h3>
+                        <p className="text-gray-400 font-semibold uppercase tracking-widest text-sm">Community Pillars</p>
                     </div>
                 </div>
             </section>

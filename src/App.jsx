@@ -9,6 +9,7 @@ import Initiatives from './pages/Initiatives';
 import Socials from './pages/Socials';
 import Contact from './pages/Contact';
 import ElementsDetail from './pages/ElementsDetail';
+import NotFound from './pages/NotFound';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/socials" element={<Socials />} />
           <Route path="/initiatives" element={<Initiatives />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 

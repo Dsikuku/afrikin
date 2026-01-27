@@ -11,7 +11,7 @@ import bgCare from '../assets/we_care.png';
 
 // Gallery Imports
 import s1 from '../assets/s1.jpg';
-import s2 from '../assets/s2.JPG'; // Note: Keep an eye on .JPG vs .jpg
+import s2 from '../assets/s2.JPG'; 
 import s3 from '../assets/s3.jpg';
 import s4 from '../assets/s4.jpg';
 import l1 from '../assets/l1.JPG';
@@ -77,49 +77,54 @@ const ElementsDetail = () => {
     return (
         <div className="bg-white min-h-screen">
             {/* Hero Section */}
-            <section className="bg-slate-900 py-16 md:py-24 px-6 text-center text-white">
-                <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Our Elements</h1>
-                <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
+            <section className="bg-slate-900 py-20 md:py-32 px-6 text-center text-white relative">
+                <div className="absolute inset-0 bg-brand-dark/5 pointer-events-none"></div>
+                <h1 className="text-4xl md:text-7xl font-extrabold mb-6 tracking-tight relative z-10">Our Elements</h1>
+                <p className="text-lg md:text-2xl opacity-80 max-w-2xl mx-auto font-light relative z-10">
                     Explore how we build, grow, and sustain our community in Toronto.
                 </p>
+                <div className="mt-8 h-1.5 w-24 bg-brand-primary mx-auto rounded-full"></div>
             </section>
 
             {/* Details Section Container */}
-            <section className="max-w-7xl mx-auto py-12 md:py-24 px-4 sm:px-6 space-y-24 md:space-y-44">
+            <section className="max-w-7xl mx-auto py-16 md:py-32 px-4 sm:px-6 space-y-32 md:space-y-56">
                 {details.map((item, index) => (
-                    <div key={index} className="space-y-12 md:space-y-16">
+                    <div key={index} className="space-y-16">
                         
-                        {/* 1. Main Content: Stacks Image on top for Mobile, Zig-Zag for Desktop */}
-                        <div className={`flex flex-col gap-10 md:gap-16 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+                        {/* 1. Main Content: Zig-Zag for Desktop */}
+                        <div className={`flex flex-col gap-12 md:gap-24 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
                             
                             {/* Image Side */}
                             <div className="w-full md:w-1/2">
                                 <div className="relative group">
-                                    <div className="absolute -inset-2 bg-blue-100 rounded-3xl transform rotate-1 group-hover:rotate-0 transition-transform duration-300 -z-10" />
+                                    {/* Decorative Brand Accent - Rotates opposite of the index for visual variety */}
+                                    <div className={`absolute -inset-4 bg-brand-light/10 rounded-3xl transform ${index % 2 === 0 ? 'rotate-2' : '-rotate-2'} group-hover:rotate-0 transition-transform duration-500 -z-10`} />
                                     <img 
                                         src={item.image} 
                                         alt={item.title} 
-                                        className="rounded-2xl md:rounded-3xl shadow-xl h-[300px] sm:h-[400px] md:h-[500px] w-full object-cover" 
+                                        className="rounded-3xl shadow-2xl h-[350px] sm:h-[450px] md:h-[550px] w-full object-cover border-4 border-white" 
                                     />
                                 </div>
                             </div>
 
                             {/* Text Side */}
-                            <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
-                                <span className="inline-block text-blue-600 font-bold tracking-widest uppercase text-xs md:text-sm bg-blue-50 px-3 py-1 rounded-full">
-                                    {item.subtitle}
-                                </span>
-                                <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
-                                    {item.title}
-                                </h2>
-                                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                            <div className="w-full md:w-1/2 space-y-8 text-center md:text-left">
+                                <div className="space-y-4">
+                                    <span className="inline-block text-brand-dark font-bold tracking-widest uppercase text-xs md:text-sm bg-brand-primary/10 px-4 py-1.5 rounded-full">
+                                        {item.subtitle}
+                                    </span>
+                                    <h2 className="text-4xl md:text-6xl font-bold text-gray-900">
+                                        {item.title}
+                                    </h2>
+                                </div>
+                                <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
                                     {item.description}
                                 </p>
                                 
-                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-left">
+                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-6 text-left">
                                     {item.features.map((feature, fIndex) => (
-                                        <li key={fIndex} className="flex items-center gap-3 text-gray-700 font-medium">
-                                            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs">✓</span>
+                                        <li key={fIndex} className="flex items-center gap-4 text-gray-800 font-semibold group/item">
+                                            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-primary/20 text-brand-dark flex items-center justify-center text-sm group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors">✓</span>
                                             {feature}
                                         </li>
                                     ))}
@@ -128,20 +133,19 @@ const ElementsDetail = () => {
                         </div>
 
                         {/* 2. Responsive Gallery Grid */}
-                        <div className="pt-8">
-                            <div className="flex items-center gap-4 mb-8">
-                                <div className="h-px bg-gray-200 flex-grow"></div>
-                                <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                        <div className="pt-12">
+                            <div className="flex items-center gap-6 mb-10">
+                                <h4 className="flex-shrink-0 text-sm font-black text-gray-300 uppercase tracking-[0.3em]">
                                     {item.title} Highlights
                                 </h4>
-                                <div className="h-px bg-gray-200 flex-grow"></div>
+                                <div className="h-px bg-gray-100 flex-grow"></div>
                             </div>
                             
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-5">
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
                                 {item.gallery.map((img, imgIndex) => (
                                     <div 
                                         key={imgIndex} 
-                                        className="overflow-hidden rounded-xl h-36 sm:h-44 md:h-56 group relative cursor-pointer shadow-sm hover:shadow-xl transition-all"
+                                        className="overflow-hidden rounded-2xl h-40 sm:h-48 md:h-64 group relative cursor-pointer shadow-sm hover:shadow-2xl transition-all hover:-translate-y-1"
                                         onClick={() => {
                                             setActiveGallery(item.gallery.map(src => ({ src })));
                                             setCurrentIndex(imgIndex);
@@ -150,22 +154,16 @@ const ElementsDetail = () => {
                                     >
                                         <img 
                                             src={img} 
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                                             alt={`${item.title} moment`} 
                                         />
-                                        <div className="absolute inset-0 bg-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                            <span className="text-white text-xs font-medium bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">View</span>
+                                        <div className="absolute inset-0 bg-brand-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            <span className="text-white text-sm font-bold bg-brand-primary/80 px-4 py-2 rounded-full backdrop-blur-md transform translate-y-4 group-hover:translate-y-0 transition-transform">View Moment</span>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                        
-                        {index !== details.length - 1 && (
-                            <div className="pt-20 md:pt-32 flex justify-center">
-                                <div className="w-24 h-1 bg-gray-100 rounded-full"></div>
-                            </div>
-                        )}
                     </div>
                 ))}
             </section>
@@ -176,9 +174,8 @@ const ElementsDetail = () => {
                 close={() => setOpen(false)}
                 index={currentIndex}
                 slides={activeGallery}
-                controller={{ closeOnBackdropClick: true, closeOnPullDown: true }}
-                on={{ click: () => setOpen(false) }}
-                animation={{ fade: 300 }}
+                controller={{ closeOnBackdropClick: true }}
+                animation={{ fade: 400 }}
             />
         </div>
     );

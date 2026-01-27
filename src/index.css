@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  /* This replaces the tailwind.config.js for v4 */
+  --color-brand-primary: #D9A443;
+  --color-brand-secondary: #D99E6A;
+  --color-brand-dark: #8C2E0B;
+  --color-brand-light: #A65A3F;
+}
+
 /* Customize the cursor inside the lightbox */
 .yarl__inner {
   cursor: zoom-out;
-} 
+}
