@@ -1,11 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* This replaces the tailwind.config.js for v4 */
+  /* Brand Colors */
   --color-brand-primary: #D9A443;
   --color-brand-secondary: #D99E6A;
   --color-brand-dark: #8C2E0B;
   --color-brand-light: #A65A3F;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui;
+  --font-display: "Montserrat", ui-sans-serif, system-ui;
+
+  /* Spacing & Borders */
+  --radius-4xl: 2rem;
+  --radius-5xl: 3rem;
+
+  /* Custom Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-widest: 0.25em;
+}
+
+@layer base {
+  html {
+    /* Set global body font and smooth behavior */
+    @apply font-sans text-slate-800 antialiased scroll-smooth;
+  }
+
+  /* Force all headings to use the Display font and tight tracking */
+  h1, h2, h3, h4 {
+    @apply font-display font-black tracking-tighter;
+  }
+
+  /* Standardize paragraph readability */
+  p {
+    @apply leading-relaxed font-light;
+  }
+}
+
+@layer components {
+  /* Global Button Class for uniform CTA styling */
+  .btn-brand {
+    @apply bg-brand-primary text-white px-10 py-4 rounded-2xl font-black 
+           uppercase tracking-widest text-[10px] transition-all duration-300 
+           hover:bg-brand-dark shadow-xl active:scale-95 flex items-center justify-center;
+  }
 }
 
 /* Customize the cursor inside the lightbox */

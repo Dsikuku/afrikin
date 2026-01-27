@@ -14,11 +14,19 @@ export default {
                 light: '#A65A3F',     // Muted Copper
             },
         },
+        fontFamily: {
+          // 'display' for big headings, 'sans' for body content
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          display: ['Montserrat', 'system-ui', 'sans-serif'],
+        },
+        letterSpacing: {
+          tighter: '-0.05em', // For those punchy H1s
+          widest: '0.25em',   // For the small all-caps labels
+        },
         animation: {
           'spin-slow': 'spin 8s linear infinite',
           'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         },
-        // Adding extra spacing or border radius if you want to standardize those [2rem] corners
         borderRadius: {
           '4xl': '2rem',
           '5xl': '3rem',

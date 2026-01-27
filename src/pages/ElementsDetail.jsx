@@ -76,55 +76,57 @@ const ElementsDetail = () => {
 
     return (
         <div className="bg-white min-h-screen">
-            {/* Hero Section */}
-            <section className="bg-slate-900 py-20 md:py-32 px-6 text-center text-white relative">
-                <div className="absolute inset-0 bg-brand-dark/5 pointer-events-none"></div>
-                <h1 className="text-4xl md:text-7xl font-extrabold mb-6 tracking-tight relative z-10">Our Elements</h1>
-                <p className="text-lg md:text-2xl opacity-80 max-w-2xl mx-auto font-light relative z-10">
-                    Explore how we build, grow, and sustain our community in Toronto.
-                </p>
-                <div className="mt-8 h-1.5 w-24 bg-brand-primary mx-auto rounded-full"></div>
+            {/* 1. HERO SECTION - Aligned with About Header */}
+            <section className="bg-slate-900 pt-32 pb-24 px-6 text-center text-white relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px] -ml-48 -mt-48"></div>
+                
+                <div className="relative z-10 max-w-4xl mx-auto">
+                    <span className="text-brand-primary uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block animate-pulse">Our Methodology</span>
+                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter italic">The Elements<span className="text-brand-primary">.</span></h1>
+                    <p className="text-lg text-gray-400 max-w-xl mx-auto font-light leading-relaxed">
+                        The five pillars that form the foundation of our community ecosystem in Toronto.
+                    </p>
+                </div>
             </section>
 
-            {/* Details Section Container */}
-            <section className="max-w-7xl mx-auto py-16 md:py-32 px-4 sm:px-6 space-y-32 md:space-y-56">
+            {/* 2. DETAILS SECTION */}
+            <section className="max-w-7xl mx-auto py-24 px-6 space-y-48">
                 {details.map((item, index) => (
-                    <div key={index} className="space-y-16">
+                    <div key={index} className="space-y-20">
                         
-                        {/* 1. Main Content: Zig-Zag for Desktop */}
-                        <div className={`flex flex-col gap-12 md:gap-24 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+                        {/* Content Row */}
+                        <div className={`flex flex-col gap-16 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
                             
-                            {/* Image Side */}
+                            {/* Featured Image */}
                             <div className="w-full md:w-1/2">
                                 <div className="relative group">
-                                    {/* Decorative Brand Accent - Rotates opposite of the index for visual variety */}
-                                    <div className={`absolute -inset-4 bg-brand-light/10 rounded-3xl transform ${index % 2 === 0 ? 'rotate-2' : '-rotate-2'} group-hover:rotate-0 transition-transform duration-500 -z-10`} />
+                                    <div className={`absolute -inset-4 bg-brand-primary/5 rounded-[2.5rem] transform ${index % 2 === 0 ? 'rotate-2' : '-rotate-2'} group-hover:rotate-0 transition-transform duration-700 -z-10`} />
                                     <img 
                                         src={item.image} 
                                         alt={item.title} 
-                                        className="rounded-3xl shadow-2xl h-[350px] sm:h-[450px] md:h-[550px] w-full object-cover border-4 border-white" 
+                                        className="rounded-[2.5rem] shadow-2xl h-[400px] md:h-[600px] w-full object-cover border-4 border-white transition-transform duration-700 group-hover:scale-[1.01]" 
                                     />
                                 </div>
                             </div>
 
-                            {/* Text Side */}
-                            <div className="w-full md:w-1/2 space-y-8 text-center md:text-left">
-                                <div className="space-y-4">
-                                    <span className="inline-block text-brand-dark font-bold tracking-widest uppercase text-xs md:text-sm bg-brand-primary/10 px-4 py-1.5 rounded-full">
+                            {/* Text Description */}
+                            <div className="w-full md:w-1/2 space-y-8">
+                                <div className="space-y-4 text-center md:text-left">
+                                    <span className="text-brand-primary font-black tracking-[0.2em] uppercase text-[10px] border-b-2 border-brand-primary/20 pb-1">
                                         {item.subtitle}
                                     </span>
-                                    <h2 className="text-4xl md:text-6xl font-bold text-gray-900">
+                                    <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight">
                                         {item.title}
                                     </h2>
                                 </div>
-                                <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
+                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-light text-center md:text-left">
                                     {item.description}
                                 </p>
                                 
-                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-6 text-left">
+                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                                     {item.features.map((feature, fIndex) => (
-                                        <li key={fIndex} className="flex items-center gap-4 text-gray-800 font-semibold group/item">
-                                            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-primary/20 text-brand-dark flex items-center justify-center text-sm group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors">✓</span>
+                                        <li key={fIndex} className="flex items-center gap-3 text-slate-800 font-bold text-sm group/item">
+                                            <div className="w-2 h-2 bg-brand-primary rounded-full group-hover/item:scale-150 transition-transform" />
                                             {feature}
                                         </li>
                                     ))}
@@ -132,20 +134,18 @@ const ElementsDetail = () => {
                             </div>
                         </div>
 
-                        {/* 2. Responsive Gallery Grid */}
-                        <div className="pt-12">
-                            <div className="flex items-center gap-6 mb-10">
-                                <h4 className="flex-shrink-0 text-sm font-black text-gray-300 uppercase tracking-[0.3em]">
-                                    {item.title} Highlights
-                                </h4>
-                                <div className="h-px bg-gray-100 flex-grow"></div>
+                        {/* Mini Gallery Row */}
+                        <div className="space-y-8">
+                            <div className="flex items-center gap-4">
+                                <h4 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em]">Highlights</h4>
+                                <div className="h-px bg-slate-100 flex-grow" />
                             </div>
                             
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 {item.gallery.map((img, imgIndex) => (
                                     <div 
                                         key={imgIndex} 
-                                        className="overflow-hidden rounded-2xl h-40 sm:h-48 md:h-64 group relative cursor-pointer shadow-sm hover:shadow-2xl transition-all hover:-translate-y-1"
+                                        className="overflow-hidden rounded-2xl h-40 md:h-56 group relative cursor-pointer bg-slate-100"
                                         onClick={() => {
                                             setActiveGallery(item.gallery.map(src => ({ src })));
                                             setCurrentIndex(imgIndex);
@@ -154,11 +154,13 @@ const ElementsDetail = () => {
                                     >
                                         <img 
                                             src={img} 
-                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
-                                            alt={`${item.title} moment`} 
+                                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 group-hover:scale-110" 
+                                            alt="Gallery moment" 
                                         />
-                                        <div className="absolute inset-0 bg-brand-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                            <span className="text-white text-sm font-bold bg-brand-primary/80 px-4 py-2 rounded-full backdrop-blur-md transform translate-y-4 group-hover:translate-y-0 transition-transform">View Moment</span>
+                                        <div className="absolute inset-0 bg-brand-dark/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                             <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-full scale-90 group-hover:scale-100 transition-transform">
+                                                <span className="text-[10px] font-black uppercase tracking-widest text-brand-dark">View</span>
+                                             </div>
                                         </div>
                                     </div>
                                 ))}
@@ -168,14 +170,12 @@ const ElementsDetail = () => {
                 ))}
             </section>
 
-            {/* Lightbox Integration */}
             <Lightbox
                 open={open}
                 close={() => setOpen(false)}
                 index={currentIndex}
                 slides={activeGallery}
                 controller={{ closeOnBackdropClick: true }}
-                animation={{ fade: 400 }}
             />
         </div>
     );

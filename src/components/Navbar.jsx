@@ -3,9 +3,19 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  // Close mobile menu on window resize if open
+  // Handle scroll for transparency
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) setIsOpen(false);
@@ -22,12 +32,22 @@ const Navbar = () => {
     { name: 'Initiatives', path: '/initiatives' }, 
   ];
 
+  // Logic to determine if navbar should be dark or light based on scroll and page
+  const isHomePage = location.pathname === "/";
+  const navBgClass = isScrolled || !isHomePage 
+    ? "bg-white/90 backdrop-blur-md border-b border-gray-100 py-3 shadow-sm" 
+    : "bg-transparent py-5 border-transparent";
+  
+  const textClass = isScrolled || !isHomePage 
+    ? "text-slate-900" 
+    : "text-white";
+
   return (
-    <nav className="bg-white/90 backdrop-blur-md border-b border-gray-50 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${navBgClass}`}>
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         
-        {/* Logo with Brand Dot */}
-        <Link to="/" className="text-2xl font-black text-slate-900 tracking-tighter">
+        {/* Logo */}
+        <Link to="/" className={`text-xl font-black tracking-tighter transition-colors ${textClass}`}>
           AfriKin<span className="text-brand-primary">.</span>
         </Link>
 
@@ -39,12 +59,13 @@ const Navbar = () => {
               <Link 
                 key={link.name} 
                 to={link.path} 
-                className={`relative text-sm font-bold uppercase tracking-widest transition-colors duration-300 hover:text-brand-dark ${
-                  isActive ? 'text-brand-dark' : 'text-gray-400'
+                className={`relative text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 hover:text-brand-primary ${
+                  isActive 
+                    ? (isScrolled || !isHomePage ? 'text-brand-dark' : 'text-brand-primary') 
+                    : (isScrolled || !isHomePage ? 'text-slate-500' : 'text-white/80')
                 }`}
               >
                 {link.name}
-                {/* Active Indicator Dot */}
                 {isActive && (
                   <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-primary rounded-full"></span>
                 )}
@@ -52,10 +73,13 @@ const Navbar = () => {
             );
           })}
           
-          {/* Featured Contact Button */}
           <Link 
             to="/contact" 
-            className="ml-4 bg-brand-dark text-white px-6 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest hover:bg-brand-primary transition-all shadow-lg shadow-brand-dark/10 active:scale-95"
+            className={`ml-4 px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all active:scale-95 ${
+              isScrolled || !isHomePage 
+                ? "bg-brand-dark text-white shadow-lg shadow-brand-dark/10 hover:bg-brand-primary" 
+                : "bg-white text-brand-dark hover:bg-brand-primary hover:text-white"
+            }`}
           >
             Contact
           </Link>
@@ -63,45 +87,38 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-slate-900 focus:outline-none p-2"
+          className={`md:hidden focus:outline-none p-2 ${textClass}`}
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
         >
-          <div className="w-6 h-5 flex flex-col justify-between relative">
-            <span className={`w-full h-0.5 bg-current rounded-full transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`w-full h-0.5 bg-current rounded-full transition-all duration-200 ${isOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`w-full h-0.5 bg-current rounded-full transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          <div className="w-5 h-4 flex flex-col justify-between relative">
+            <span className={`w-full h-0.5 bg-current transition-all ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+            <span className={`w-full h-0.5 bg-current transition-all ${isOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`w-full h-0.5 bg-current transition-all ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
           </div>
         </button>
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl transition-all duration-300 ease-in-out overflow-hidden ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="flex flex-col p-8 gap-6">
-          {navLinks.map((link) => (
+      <div className={`md:hidden absolute top-0 left-0 w-full bg-white h-screen transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+          <div className="flex flex-col items-center justify-center h-full gap-8">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.name} 
+                to={link.path} 
+                className="text-2xl font-black text-slate-900 tracking-tighter"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
             <Link 
-              key={link.name} 
-              to={link.path} 
-              className={`text-lg font-bold tracking-tight ${
-                location.pathname === link.path ? 'text-brand-primary' : 'text-slate-900'
-              }`}
+              to="/contact"
+              className="mt-4 bg-brand-dark text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs"
               onClick={() => setIsOpen(false)}
             >
-              {link.name}
+              Get In Touch
             </Link>
-          ))}
-          <Link 
-            to="/contact"
-            className="mt-2 bg-brand-dark text-white text-center py-4 rounded-2xl font-bold"
-            onClick={() => setIsOpen(false)}
-          >
-            Get In Touch
-          </Link>
-        </div>
+          </div>
       </div>
     </nav>
   );
