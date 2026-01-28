@@ -10,6 +10,7 @@ import Socials from './pages/Socials';
 import Contact from './pages/Contact';
 import ElementsDetail from './pages/ElementsDetail';
 import NotFound from './pages/NotFound';
+import InitiativeDetail from './pages/InitiativeDetail';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/elements" element={<ElementsDetail />} />
           <Route path="/socials" element={<Socials />} />
           <Route path="/initiatives" element={<Initiatives />} />
+          <Route path="/initiatives/:id" element={<InitiativeDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

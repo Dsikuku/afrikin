@@ -34,18 +34,20 @@ const projects = [
 ];
 
 const Initiatives = () => {
+  // Helper to create URL-friendly slugs
+  const createSlug = (text) => text.toLowerCase().replace(/\s+/g, '-');
+
   return (
     <div className="bg-white min-h-screen">
       
-      {/* 1. HEADER SECTION - Aligned with the new Design System */}
+      {/* 1. HEADER SECTION */}
       <section className="bg-slate-900 pt-32 pb-24 px-6 text-center text-white relative overflow-hidden">
-        {/* Signature Brand Glows */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px] -mr-48 -mt-48"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-light/5 rounded-full blur-[100px] -ml-32 -mb-32"></div>
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <span className="text-brand-primary uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block">Our Impact</span>
-          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">
+          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter italic">
             Initiatives<span className="text-brand-primary">.</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
@@ -82,8 +84,12 @@ const Initiatives = () => {
                   {project.status}
                 </span>
                 
-                <Link to="/contact" className="flex items-center gap-2 text-brand-dark font-black text-[10px] uppercase tracking-widest hover:gap-4 transition-all group/btn">
-                  Get Involved 
+                {/* Updated Link to use dynamic routing */}
+                <Link 
+                  to={`/initiatives/${createSlug(project.title)}`} 
+                  className="flex items-center gap-2 text-brand-dark font-black text-[10px] uppercase tracking-widest hover:gap-4 transition-all group/btn"
+                >
+                  Learn More 
                   <FaArrowRight className="text-brand-primary transition-transform group-hover/btn:scale-125" />
                 </Link>
               </div>
@@ -92,10 +98,9 @@ const Initiatives = () => {
         </div>
       </section>
 
-      {/* 3. SUGGESTION CTA - Refined Layout */}
+      {/* 3. SUGGESTION CTA */}
       <section className="max-w-6xl mx-auto mb-32 px-6">
         <div className="bg-slate-950 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-slate-900/20">
-          {/* Internal Glow for CTA */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-brand-primary/5 blur-[100px] pointer-events-none"></div>
           
           <div className="relative z-10">
