@@ -16,22 +16,28 @@ import InitiativeDetail from './pages/InitiativeDetail';
 function App() {
   return (
     <Router>
-      <Navbar />
-      <ScrollToTop />
-      <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/elements" element={<ElementsDetail />} />
-          <Route path="/socials" element={<Socials />} />
-          <Route path="/initiatives" element={<Initiatives />} />
-          <Route path="/initiatives/:id" element={<InitiativeDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+      {/* This wrapper ensures the footer stays down and the layout is contained */}
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <ScrollToTop />
+        
+        {/* pt-20 matches the Navbar height on mobile. 
+            We keep it on desktop too if the Navbar is fixed/white to prevent overlap. */}
+        <main className="flex-grow md:pt-0">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/elements" element={<ElementsDetail />} />
+            <Route path="/socials" element={<Socials />} />
+            <Route path="/initiatives" element={<Initiatives />} />
+            <Route path="/initiatives/:id" element={<InitiativeDetail />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </Router>
   );
 }

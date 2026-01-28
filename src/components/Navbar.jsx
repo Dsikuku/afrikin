@@ -1,124 +1,118 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Handle scroll for transparency
+  useEffect(() => {
+    setIsOpen(false);
+    document.body.style.overflow = 'unset';
+  }, [location]);
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close mobile menu on resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) setIsOpen(false);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Elements', path: '/elements' },
+    { name: 'Initiatives', path: '/initiatives' },
     { name: 'Socials', path: '/socials' },
-    { name: 'Initiatives', path: '/initiatives' }, 
   ];
 
-  // Logic to determine if navbar should be dark or light based on scroll and page
-  const isHomePage = location.pathname === "/";
-  const navBgClass = isScrolled || !isHomePage 
-    ? "bg-white/90 backdrop-blur-md border-b border-gray-100 py-3 shadow-sm" 
-    : "bg-transparent py-5 border-transparent";
-  
-  const textClass = isScrolled || !isHomePage 
-    ? "text-slate-900" 
-    : "text-white";
+  const darkHeaderPages = ['/about', '/elements', '/socials', '/initiatives'];
+  const isDarkPage = darkHeaderPages.includes(location.pathname) || location.pathname.startsWith('/initiatives/');
+  const useWhiteText = isOpen || (!scrolled && (isDarkPage || location.pathname === '/'));
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${navBgClass}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+    <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
+      scrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
         
-        {/* Logo */}
-        <Link to="/" className={`text-xl font-black tracking-tighter transition-colors ${textClass}`}>
-          AfriKin<span className="text-brand-primary">.</span>
+        {/* LOGO */}
+        <Link to="/" className="relative z-[110]">
+          <span className={`text-2xl font-black tracking-tighter transition-colors duration-300 ${
+            useWhiteText ? 'text-white' : 'text-slate-900'
+          }`}>
+            AfriKin<span className="text-brand-primary">.</span>
+          </span>
         </Link>
 
-        {/* Desktop Menu */}
+        {/* DESKTOP LINKS */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
-            return (
-              <Link 
-                key={link.name} 
-                to={link.path} 
-                className={`relative text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 hover:text-brand-primary ${
-                  isActive 
-                    ? (isScrolled || !isHomePage ? 'text-brand-dark' : 'text-brand-primary') 
-                    : (isScrolled || !isHomePage ? 'text-slate-500' : 'text-white/80')
-                }`}
-              >
-                {link.name}
-                {isActive && (
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-primary rounded-full"></span>
-                )}
-              </Link>
-            );
-          })}
-          
-          <Link 
-            to="/contact" 
-            className={`ml-4 px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all active:scale-95 ${
-              isScrolled || !isHomePage 
-                ? "bg-brand-dark text-white shadow-lg shadow-brand-dark/10 hover:bg-brand-primary" 
-                : "bg-white text-brand-dark hover:bg-brand-primary hover:text-white"
-            }`}
-          >
-            Contact
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-brand-primary ${
+                useWhiteText ? 'text-white/90' : 'text-slate-600'
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Link to="/contact">
+            <button className={`px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
+              useWhiteText 
+                ? 'bg-white text-slate-900 hover:bg-brand-primary hover:text-white' 
+                : 'bg-brand-dark text-white hover:bg-brand-primary'
+            }`}>
+              Join Circle
+            </button>
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* MOBILE TOGGLE */}
         <button 
-          className={`md:hidden focus:outline-none p-2 ${textClass}`}
+          className="md:hidden relative z-[110] p-2 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <div className="w-5 h-4 flex flex-col justify-between relative">
-            <span className={`w-full h-0.5 bg-current transition-all ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-            <span className={`w-full h-0.5 bg-current transition-all ${isOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`w-full h-0.5 bg-current transition-all ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
-          </div>
+          {isOpen ? (
+            <FaTimes className="text-white w-6 h-6" />
+          ) : (
+            <FaBars className={`${useWhiteText ? 'text-white' : 'text-slate-900'} w-6 h-6`} />
+          )}
         </button>
-      </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`md:hidden absolute top-0 left-0 w-full bg-white h-screen transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-          <div className="flex flex-col items-center justify-center h-full gap-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.path} 
-                className="text-2xl font-black text-slate-900 tracking-tighter"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
+        {/* MOBILE MENU OVERLAY */}
+        <div className={`fixed inset-0 bg-slate-950 transition-all duration-500 ease-in-out ${
+          isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+        } md:hidden z-[100] h-[100dvh] w-screen`}>
+          
+          {/* Decorative Background Glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px]"></div>
+          
+          {/* THE ACTUAL LINKS (Now Restored) */}
+          <div className="h-full w-full flex flex-col justify-center items-center px-6 relative z-10">
+            <div className="flex flex-col items-center gap-10">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className="text-4xl font-black text-white italic tracking-tighter hover:text-brand-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link to="/contact" onClick={() => setIsOpen(false)}>
+                <button className="mt-4 bg-brand-primary text-white px-12 py-5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl">
+                  Join the Circle
+                </button>
               </Link>
-            ))}
-            <Link 
-              to="/contact"
-              className="mt-4 bg-brand-dark text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs"
-              onClick={() => setIsOpen(false)}
-            >
-              Get In Touch
-            </Link>
+            </div>
           </div>
+        </div>
+
       </div>
     </nav>
   );
