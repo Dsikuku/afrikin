@@ -28,7 +28,7 @@ const Navbar = () => {
     { name: 'Socials', path: '/socials' },
   ];
 
-  const darkHeaderPages = ['/about', '/elements', '/socials', '/initiatives'];
+  const darkHeaderPages = ['/about', '/elements', '/socials', '/initiatives' , '/contact'];
   const isDarkPage = darkHeaderPages.includes(location.pathname) || location.pathname.startsWith('/initiatives/');
   const useWhiteText = isOpen || (!scrolled && (isDarkPage || location.pathname === '/'));
 
