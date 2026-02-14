@@ -12,6 +12,8 @@ import ElementsDetail from './pages/ElementsDetail';
 import NotFound from './pages/NotFound';
 import InitiativeDetail from './pages/InitiativeDetail';
 import KinnectDetail from './pages/KinnectDetail';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="/initiatives/:id" element={<InitiativeDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} /> 
           </Routes>
         </main>
         <Footer />

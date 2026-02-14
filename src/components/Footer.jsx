@@ -94,9 +94,10 @@ const Footer = () => {
           © {currentYear} AfriKin Circle<span className="mx-2 md:mx-4 opacity-30">|</span>Built for Community
         </p>
         
+        {/* Updated from <button> to <Link> */}
         <div className="flex gap-10 text-[9px] uppercase tracking-[0.4em] font-black text-slate-600">
-          <button className="hover:text-brand-primary transition-colors">Privacy</button>
-          <button className="hover:text-brand-primary transition-colors">Terms</button>
+          <Link to="/privacy" className="hover:text-brand-primary transition-colors">Privacy</Link>
+          <Link to="/terms" className="hover:text-brand-primary transition-colors">Terms</Link>
         </div>
       </div>
     </footer>
