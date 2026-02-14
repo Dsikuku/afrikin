@@ -174,7 +174,7 @@ const Socials = () => {
 
       {/* SOCIAL CTA */}
       <section className="max-w-5xl mx-auto px-6 pt-24">
-        <div className="p-16 md:p-24 rounded-[4rem] bg-slate-950 text-center relative overflow-hidden group">
+        <div className="bg-slate-950 rounded-[3rem] p-12 text-center text-white">
           <FaInstagram className="text-6xl text-brand-primary mx-auto mb-8 animate-pulse" />
           <h2 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">Join The Circle</h2>
           <a href="https://www.instagram.com/afrikin_circle/" className="inline-block bg-brand-primary text-brand-dark px-14 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-white hover:scale-105 transition-all shadow-2xl shadow-brand-primary/10" target='_blank'>@AfriKinCircle</a>
