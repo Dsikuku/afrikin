@@ -173,11 +173,11 @@ const Socials = () => {
       <Lightbox slides={archiveGallery.map(img => ({ src: img.src }))} open={index >= 0} index={index} close={() => setIndex(-1)} styles={{ container: { backgroundColor: "rgba(10, 10, 10, 0.99)" } }} />
 
       {/* SOCIAL CTA */}
-      <section className="max-w-4xl mx-auto px-6 pt-20">
-        <div className="p-16 md:p-24 rounded-[4rem] bg-slate-900 text-center relative overflow-hidden group">
+      <section className="max-w-5xl mx-auto px-6 pt-24">
+        <div className="p-16 md:p-24 rounded-[4rem] bg-slate-950 text-center relative overflow-hidden group">
           <FaInstagram className="text-6xl text-brand-primary mx-auto mb-8 animate-pulse" />
           <h2 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">Join The Circle</h2>
-          <a href="#" className="inline-block bg-brand-primary text-brand-dark px-14 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-white hover:scale-105 transition-all shadow-2xl shadow-brand-primary/10">@AfriKinCircle</a>
+          <a href="https://www.instagram.com/afrikin_circle/" className="inline-block bg-brand-primary text-brand-dark px-14 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-white hover:scale-105 transition-all shadow-2xl shadow-brand-primary/10" target='_blank'>@AfriKinCircle</a>
         </div>
       </section>
 

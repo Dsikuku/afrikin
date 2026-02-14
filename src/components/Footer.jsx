@@ -56,7 +56,7 @@ const Footer = () => {
           <h3 className="text-white font-black uppercase tracking-[0.3em] text-[10px]">Connect</h3>
           <div className="flex gap-3">
             <a 
-              href="https://instagram.com" 
+              href="https://www.instagram.com/afrikin_circle/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-white/5 p-4 rounded-2xl hover:bg-brand-primary hover:text-white transition-all duration-500 group"
@@ -65,7 +65,7 @@ const Footer = () => {
               <FaInstagram className="w-5 h-5 text-slate-400 group-hover:text-white group-hover:scale-110" />
             </a>
             <a 
-              href="https://tiktok.com" 
+              href="https://www.tiktok.com/@afrikin.circle" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-white/5 p-4 rounded-2xl hover:bg-brand-dark hover:text-white transition-all duration-500 group"
